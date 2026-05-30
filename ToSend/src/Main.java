@@ -1,109 +1,63 @@
-<<<<<<< Updated upstream
-=======
 class Main {
     public static void main(String[] args) {
-        // = 
-        int a = 10;
+        Integer dec = Integer.decode("123");
+        Integer hex = Integer.decode("0x7B");
+        Integer oct = Integer.decode("0173");
+        Integer neg = Integer.decode("-123");
 
-        // +=
-        int x = 5;
-        x += 3;
-        x -= 6;
-        x *= 3;
-        x /= 2; // x = 3
-        x %= 2; // x = 1
-
-        // += с String
-        String str = "Java";
-        str += " Course";
-
-        // ?:
-        int age = 18;
-        String result = (age >= 18) ? "Совершеннолетний" : "Несовершеннолетний";
-
-        // || и &&
-        boolean b1 = (5 > 3) || (2 > 10);
-        boolean b2 = (5 > 3) && (2 > 10);
-
-        // | ^ &
-        int bitOr = 5 | 3;
-        int bitXor = 5 ^ 3;
-        int bitAnd = 5 & 3;
-
-        // == !=
-        int num1 = 10, num2 = 10;
-        boolean isEqual = (num1 == num2);
-        boolean isNotEqual = (num1 != 5);
-
-        // > < >= <=
-        boolean greater = (10 > 5);
-        boolean less = (3 < 7);
-
-        // >> >>> <<
-        int rightShift = 16 >> 2;
-        int unsignedRightShift = -16 >>> 2;
-        int leftShift = 4 << 2;
-
-        // + - * / %
-        int sum = 10 + 5;
-        int diff = 10 - 5;
-        int product = 10 * 5;
-        int quotient = 10 / 5;
-        int remainder = 10 % 3;
-
-        // Конкатенация String
-        String text = "Число: " + 42;
-
-        // ++ --
-        int count = 5;
-        int postInc = count++;
-        int preInc = ++count;
-
-        // ! и ~
-        boolean bool = true;
-        boolean notBool = !bool;
-        int bitNot = ~5;
-
-        // () и []
-        int priority = (2 + 3) * 4;
-        int[] array = {1, 2, 3};
-        int element = array[0];
-
-        System.out.println(str);
-        System.out.println(result);
-        System.out.println(text);
+        System.out.println("dec: " + dec);
+        System.out.println("hex: 0x7B = " + hex);
+        System.out.println("oct: 0173 = " + oct);
+        System.out.println("neg: " + neg);
     }
 }
 
 class Main {
     public static void main(String[] args) {
-        // instanceof с классом String
-        String str = "Hello";
-        boolean isString = str instanceof String;
-        System.out.println("str instanceof String: " + isString);
+        Integer a = Integer.valueOf(100);
+        Integer b = Integer.valueOf("100");
+        int c = Integer.parseInt("100");
+        Integer d = Integer.decode("100");
 
-        // instanceof с наследованием
-        Animal animal = new Dog();
-        boolean isDog = animal instanceof Dog;
-        boolean isAnimal = animal instanceof Animal;
-        boolean isCat = animal instanceof Cat;
-
-        System.out.println("animal instanceof Dog: " + isDog);
-        System.out.println("animal instanceof Animal: " + isAnimal);
-        System.out.println("animal instanceof Cat: " + isCat);
-
-        // instanceof с null-объектом
-        String nullString = null;
-        boolean nullCheck = nullString instanceof String;
-        System.out.println("null instanceof String: " + nullCheck);
-
-        Object nullObj = null;
-        boolean nullObjCheck = nullObj instanceof Object;
-        System.out.println("null instanceof Object: " + nullObjCheck);
+        System.out.println("valueOf(100): " + a);
+        System.out.println("valueOf(\"100\"): " + b);
+        System.out.println("parseInt(\"100\"): " + c);
+        System.out.println("decode(\"100\"): " + d);
     }
 }
 
-class Animal {}
-class Dog extends Animal {}
-class Cat extends Animal {}
->>>>>>> Stashed changes
+class Main {
+    public static void main(String[] args) {
+        // NullPointerException при автоупаковке не бывает (null присвоить примитиву нельзя)
+        // NullPointerException возникает при автораспаковке null-объекта
+
+        Integer nullInteger = null;
+        int value = nullInteger; // NullPointerException здесь!
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        int i1 = 128;
+        Integer a1 = i1;
+        Integer b1 = i1;
+        System.out.println("a1==i1 " + (a1 == i1));      // true
+        System.out.println("b1==i1 " + (b1 == i1));      // true
+        System.out.println("a1==b1 " + (a1 == b1));      // false
+        System.out.println("a1.equals(i1) -> " + a1.equals(i1));   // true
+        System.out.println("b1.equals(i1) -> " + b1.equals(i1));   // true
+        System.out.println("a1.equals(b1) -> " + a1.equals(b1));   // true
+
+        int i2 = 127;
+        Integer a2 = i2;
+        Integer b2 = i2;
+        System.out.println("a2==i2 " + (a2 == i2));      // true
+        System.out.println("b2==i2 " + (b2 == i2));      // true
+        System.out.println("a2==b2 " + (a2 == b2));      // true
+        System.out.println("a2.equals(i2) -> " + a2.equals(i2));   // true
+        System.out.println("b2.equals(i2) -> " + b2.equals(i2));   // true
+        System.out.println("a2.equals(b2) -> " + a2.equals(b2));   // true
+    }
+}
+IntegerCache — это внутренний кэш Java, который хранит объекты Integer для диапазона чисел от -128 до 127 по умолчанию.
+Для 128 создается 2 объекта поэтому будет false
