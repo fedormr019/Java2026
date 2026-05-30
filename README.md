@@ -1,1 +1,14 @@
+<<<<<<< Updated upstream
 # Java2026
+=======
+Запишите следующий код через конструкцию ? :
+
+int i = 0;
+if (a == 1) {
+    i = 1;
+} else if (a == 2) {
+    i = 2;
+} else {
+    i = 3; 
+}
+>>>>>>> Stashed changes
